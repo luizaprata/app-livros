@@ -1,7 +1,6 @@
 export interface Livro {
-  id: string | number
+  id: string
   titulo: string
-  ano: any
-  avaliacao: number
-  selecionado: boolean
+  sinopse: string
+  anoLancamento: number
 }

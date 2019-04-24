@@ -1,50 +1,55 @@
 import React, { Component } from 'react'
-import Button from '../../components/button/Button'
-import TituloLivro from '../../components/titulo-livro/TituloLivro'
+import FichaLivro from '../../components/ficha-livro/FichaLivro'
 import { Livro } from '../../entities/Livro'
 
-import { Container, Descricao, EstanteContainer } from './Estante.style'
-
-interface Props {
-  clickReserva: (livros: Livro[]) => void
-}
+import {
+  Container,
+  EstanteContainer,
+  LancamentosContainer,
+} from './Estante.style'
 
 interface State {
   livros: Livro[]
 }
 
-class Estante extends Component<Props, State> {
+class Estante extends Component<any, State> {
+  anoAtual: number
+
   constructor(props) {
     super(props)
 
     this.state = {
-      livros: [],
+      livros: [
+        { id: '', titulo: 'titulo', sinopse: 'sinopse', anoLancamento: 2000 },
+      ],
     }
+
+    this.anoAtual = new Date().getFullYear()
   }
 
-  totalLivrosSelecionados = () => {
-    return this.state.livros.filter((l: Livro) => l.selecionado === true).length
+  totalLivrosLancamento = () => {
+    return this.state.livros.filter(
+      (l: Livro) => l.anoLancamento === this.anoAtual,
+    ).length
   }
+
   totalLivros = () => {
     return this.state.livros.length
   }
-  clickReserva = () => {
-    this.props.clickReserva(this.state.livros)
+
+  renderFichaLivros = () => {
+    return this.state.livros.map((livro) => {
+      return <FichaLivro key={livro.id} livro={livro} />
+    })
   }
 
   render() {
     return (
       <Container>
-        <TituloLivro
-          titulo="Fase de Seleção"
-          descricao="Selecione os livros que deseja reservar"
-        />
-        <EstanteContainer>
-          <Descricao>
-            {`${this.totalLivrosSelecionados()} do total de ${this.totalLivros()}`}
-          </Descricao>
-          <Button title="Fazer reserva" onClick={this.clickReserva} />
-        </EstanteContainer>
+        <LancamentosContainer>
+          {`${this.totalLivrosLancamento()} dos ${this.totalLivros()} livros são lançamentos`}
+        </LancamentosContainer>
+        <EstanteContainer>{this.renderFichaLivros()}</EstanteContainer>
       </Container>
     )
   }

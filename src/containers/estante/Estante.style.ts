@@ -1,21 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 80%;
-  padding: 3% 0;
+  padding: 20;
 `
 
-export const Descricao = styled.div`
-  color: #fff;
-  font-weight: bold;
-  font-size: 22px;
+export const LancamentosContainer = styled.div`
+  font-size: 20px;
   text-align: 'end';
-`
+  color: 'black';
+]`
 
 export const EstanteContainer = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
 `

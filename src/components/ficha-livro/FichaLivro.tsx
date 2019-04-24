@@ -27,7 +27,9 @@ class FichaLivro extends Component<Props, State> {
   }
 
   alternaExpandido = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     this.setState({
       expandido: !this.state.expandido,

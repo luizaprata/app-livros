@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-
-import { Livro } from '../../entities/Livro'
 import Button from '../../components/button/Button'
 import TituloLivro from '../../components/titulo-livro/TituloLivro'
+import { Livro } from '../../entities/Livro'
 
 import { Container, Descricao, EstanteContainer } from './Estante.style'
 
 interface Props {
-  clickFazerReserva: (livros: Livro[]) => void
+  clickReserva: (livros: Livro[]) => void
 }
 
 interface State {
@@ -29,6 +28,9 @@ class Estante extends Component<Props, State> {
   totalLivros = () => {
     return this.state.livros.length
   }
+  clickReserva = () => {
+    this.props.clickReserva(this.state.livros)
+  }
 
   render() {
     return (
@@ -41,10 +43,7 @@ class Estante extends Component<Props, State> {
           <Descricao>
             {`${this.totalLivrosSelecionados()} do total de ${this.totalLivros()}`}
           </Descricao>
-          <Button
-            title="Fazer reserva"
-            onClick={() => this.props.clickFazerReserva(this.state.livros)}
-          />
+          <Button title="Fazer reserva" onClick={this.clickReserva} />
         </EstanteContainer>
       </Container>
     )

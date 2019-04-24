@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FichaLivro from '../../components/ficha-livro/FichaLivro'
 import { Livro } from '../../entities/Livro'
+import { buscarLivrosMock } from '../../services/livros/api'
 
 import {
   Container,
@@ -10,21 +11,39 @@ import {
 
 interface State {
   livros: Livro[]
+  buscaLivrosErro: boolean
+  buscaLivrosMensagemErro: string
 }
 
 class Estante extends Component<any, State> {
   anoAtual: number
 
+  state = {
+    livros: [],
+    buscaLivrosErro: false,
+    buscaLivrosMensagemErro: '',
+  }
+
   constructor(props) {
     super(props)
-
-    this.state = {
-      livros: [
-        { id: '', titulo: 'titulo', sinopse: 'sinopse', anoLancamento: 2000 },
-      ],
-    }
-
+    buscarLivrosMock(this.sucessoBuscaLivros, this.erroBuscaLivros)
     this.anoAtual = new Date().getFullYear()
+  }
+
+  erroBuscaLivros = (mensagem: string) => {
+    this.setState({
+      buscaLivrosErro: true,
+      buscaLivrosMensagemErro: mensagem,
+    })
+  }
+
+  sucessoBuscaLivros = (livros: Livro[]) => {
+    // eslint-disable-next-line
+    console.log('sucesso', livros)
+
+    this.setState({
+      livros,
+    })
   }
 
   totalLivrosLancamento = () => {
@@ -38,8 +57,8 @@ class Estante extends Component<any, State> {
   }
 
   renderFichaLivros = () => {
-    return this.state.livros.map((livro) => {
-      return <FichaLivro key={livro.id} livro={livro} />
+    return this.state.livros.map((livro, i) => {
+      return <FichaLivro key={i} livro={livro} />
     })
   }
 

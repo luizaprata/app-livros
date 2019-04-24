@@ -40,8 +40,10 @@ class FichaLivro extends Component<Props, State> {
     const { titulo, sinopse, anoLancamento } = this.props.livro
     return (
       <div onClick={this.alternaExpandido} style={styles.container}>
-        <div>{titulo}</div>
-        <div>{anoLancamento}</div>
+        <div style={styles.header}>
+          <div>{titulo}</div>
+          <div>{anoLancamento}</div>
+        </div>
         <div>{this.renderSinopse(sinopse)}</div>
       </div>
     )

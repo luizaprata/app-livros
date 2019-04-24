@@ -25,3 +25,32 @@ export const buscarLivros = async (
     )
   }
 }
+
+export const buscarLivrosMock = async (
+  respostaSucesso: (livros: Livro[]) => void,
+  respostaErro: (err: any) => void,
+) => {
+  return respostaSucesso([
+    {
+      id: 'qwe',
+      titulo: 'Lorem ipsum dolor',
+      sinopse:
+        'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur nostrum, temporibus illum tenetur quae velit quaerat cum, enim itaque minus soluta ut repellat praesentium. Numquam cum nemo beatae nihil tempora.',
+      anoLancamento: 2000,
+    },
+    {
+      id: 'asd',
+      titulo: 'In eveniet',
+      sinopse:
+        'In eveniet, dolorem adipisci placeat molestias quisquam minus nihil harum cupiditate saepe enim doloremque ullam. Nostrum explicabo, impedit ullam sint mollitia illum consequatur possimus rem vitae suscipit voluptas, et omnis.',
+      anoLancamento: 1999,
+    },
+    {
+      id: 'zxc',
+      titulo: 'Totam explicabo suscipit',
+      sinopse:
+        'Totam explicabo suscipit voluptatibus ipsum. Velit numquam, autem, omnis corrupti quidem fugiat magni, nam perferendis quaerat sit reprehenderit. Enim tempore magnam blanditiis magni eum quae neque modi dolores, adipisci aperiam.',
+      anoLancamento: 2019,
+    },
+  ])
+}

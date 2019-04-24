@@ -26,11 +26,11 @@ export const buscarLivros = async (
   }
 }
 
-export const buscarLivrosMock = async (
+export const buscarLivrosMock = (
   respostaSucesso: (livros: Livro[]) => void,
   respostaErro: (err: any) => void,
 ) => {
-  return respostaSucesso([
+  respostaSucesso([
     {
       id: 'qwe',
       titulo: 'Lorem ipsum dolor',

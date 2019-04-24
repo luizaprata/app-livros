@@ -18,16 +18,18 @@ interface State {
 class Estante extends Component<any, State> {
   anoAtual: number
 
-  state = {
-    livros: [],
-    buscaLivrosErro: false,
-    buscaLivrosMensagemErro: '',
-  }
-
   constructor(props) {
     super(props)
-    buscarLivrosMock(this.sucessoBuscaLivros, this.erroBuscaLivros)
     this.anoAtual = new Date().getFullYear()
+    this.state = {
+      livros: [],
+      buscaLivrosErro: false,
+      buscaLivrosMensagemErro: '',
+    }
+  }
+
+  componentDidMount() {
+    buscarLivrosMock(this.sucessoBuscaLivros, this.erroBuscaLivros)
   }
 
   erroBuscaLivros = (mensagem: string) => {
@@ -38,9 +40,6 @@ class Estante extends Component<any, State> {
   }
 
   sucessoBuscaLivros = (livros: Livro[]) => {
-    // eslint-disable-next-line
-    console.log('sucesso', livros)
-
     this.setState({
       livros,
     })

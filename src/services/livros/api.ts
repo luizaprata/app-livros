@@ -20,8 +20,8 @@ export const buscarLivros = async (
       respostaSucesso(apiResponse as Livro[])
     }
   } catch (err) {
-    /* tslint:disable */
-    console.error(err)
-    respostaErro(err)
+    respostaErro(
+      'Desculpa, ocorreu uma falha nos nossos serviços. Tente mais tarde',
+    )
   }
 }

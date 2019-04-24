@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, MouseEvent } from 'react'
 import { Livro } from '../../entities/Livro'
+import * as styles from './FichaLivro.style'
 
 interface Props {
   livro: Livro
@@ -25,10 +26,18 @@ class FichaLivro extends Component<Props, State> {
     return <div>{sinopse}</div>
   }
 
+  alternaExpandido = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+
+    this.setState({
+      expandido: !this.state.expandido,
+    })
+  }
+
   render() {
     const { titulo, sinopse, anoLancamento } = this.props.livro
     return (
-      <div>
+      <div onClick={this.alternaExpandido} style={styles.container}>
         <div>{titulo}</div>
         <div>{anoLancamento}</div>
         <div>{this.renderSinopse(sinopse)}</div>
